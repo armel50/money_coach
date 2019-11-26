@@ -7,32 +7,61 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/visibility.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
   <script src="javaScript/main.js"> </script>
+    <link rel="stylesheet" href="stylesheets/main.css">
   <title>Money Coach</title>
 </head>
 <body>
     <div class = "ui container">
-        <div class="user-info">
+        <div class = "ui raised segment errors hidden">
+                <h3>The following Errors Prevented you to access your account</h3>
+                <ul class="errors"></ul>
+        </div>
+    </div>
+    <div class = "ui container">
+        
+        <div class = "signUp_signIn ui raised segment">
+            <h1>Sign Up Or Sign In</h1>
+            <form class = "sign_up_or_in ui form"> 
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" name = "email" placeholder="example@gmail.com"> 
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name = "password" placeholder="password">
+                </div>
+                <input type="submit" class= "ui button">
+            </form>
+        </div>
+    </div>
+    <div class="ui container main">
+        <div class="user-info ui raised segment">
             <h1>User Info</h1>
-        </div>
-        <div class = "signUp_signIn">
-            <h1>SignUp</h1>
+            <p>user email</p>
+            <p>user loved investment idea</p>
+
         </div>
 
-        <div class = "income">
+        <div class = "income ui raised segment">
             <h1>Income</h1>
+            <button class = "add_income ui positive">Add Icome</button>
+            <form class = "ui form income">
+                <input type="number" class = "income">
+                <input type="submit" class = "ui button">
+            </form>
         </div>
 
-        <div class="spending">
+        <div class="spending ui raised segment">
             <h1>Spending</h1>
         </div>
 
-        <div class="Goals">
+        <div class="Goals ui raised segment">
             <h1>Goals</h1>
         </div>
 
-        <div class = "Investments">
+        <div class = "Investments ui raised segment">
 
-            <div class = "Stock-market">
+            <div class = "Stock-market ui raised segment">
                 <h1>Stock-market</h1>
             </div>
 

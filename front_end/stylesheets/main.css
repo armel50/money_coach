@@ -1,0 +1,7 @@
+.hidden{
+    display: none;
+}
+
+div.ui.raised.segment.errors{
+    background: red;
+}
