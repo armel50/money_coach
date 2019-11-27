@@ -12,7 +12,10 @@ class CategoriesController < ApplicationController
     end
 
     def destroy 
-        binding.pry
+        category = Category.find_by(id: params.permit(:category_id)["category_id"])
+        user = category.user
+        category.delete
+        render json: {message: "success",categories: user.categories }
     end
     private 
     def category_params 
