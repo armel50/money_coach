@@ -6,8 +6,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sidebar.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/visibility.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
-  <script src="javaScript/main.js"> </script>
+  <script src="javaScript/main.js?v=1"> </script>
     <link rel="stylesheet" href="stylesheets/main.css">
+    
   <title>Money Coach</title>
 </head>
 <body>
@@ -34,39 +35,71 @@
             </form>
         </div>
     </div>
-    <div class="ui container main">
-        <div class="user-info ui raised segment">
-            <h1>User Info</h1>
-            <p>user email</p>
-            <p>user loved investment idea</p>
+    <div class="ui container main grid">
+        <div class="four wide column">
+
+            <div class="user-info ui raised segment">
+                <h1>User Info</h1>
+                <p>user email</p>
+                <p>user loved investment idea</p>
+                <p> user income</p>
+            </div>
+        </div>
+        <div class="eight wide column">
+                <div class = "ui raised segment budget">
+                        <h1>User Budget</h1>
+                    </div>
+        </div>
+            
+        <div class="four wide column">
+            <div class = "income ui raised segment">
+                <h1>Income</h1>
+                <form class = "ui form income">
+                    <input type="number" class = "income">
+                    <input type="submit" class = "ui positive button">
+                </form>
+            </div>
 
         </div>
 
-        <div class = "income ui raised segment">
-            <h1>Income</h1>
-            <button class = "add_income ui positive">Add Icome</button>
-            <form class = "ui form income">
-                <input type="number" class = "income">
-                <input type="submit" class = "ui button">
-            </form>
+        <div class="four wide column">
+            <div class="Goals ui raised segment">
+                    <h1>Goals</h1>
+            </div>
         </div>
+        <div class="eight wide column">
+             <div class="spending ui raised segment">
+                    <div class="ui horizontal statistic">
+                            <div class="value total_spendings">
+                                Total: 
+                            </div>
+                            <div class="label">
+                                $
+                            </div>
+                        </div>
 
-        <div class="spending ui raised segment">
-            <h1>Spending</h1>
+                <h1>Spending</h1> <button class="new_spending">Add Spending Category</button>
+                <ul class = "spendings"></ul>
+                <form class="ui form new_spending">
+                    <div class="field">
+                        <label>Name</label>
+                        <input type="text" name = "name" placeholder="Name of category"> 
+                    </div>
+                    <div class="field">
+                        <label>Cost</label>
+                        <input type="number" name = "cost" placeholder="in $">
+                    </div>
+                    <input type="submit" class= "ui button">
+                </form>
+            </div>
         </div>
+           
 
-        <div class="Goals ui raised segment">
-            <h1>Goals</h1>
-        </div>
 
         <div class = "Investments ui raised segment">
 
             <div class = "Stock-market ui raised segment">
                 <h1>Stock-market</h1>
-            </div>
-
-            <div class = "">
-
             </div>
         </div>
             
