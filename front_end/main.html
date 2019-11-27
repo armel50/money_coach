@@ -6,6 +6,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/sidebar.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/visibility.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+   <!-- the order of the following script is really important -->
+
+   <script src="javaScript/user.js?v=3"></script>
+   <script src="javaScript/spending.js"></script>
+   <script src="javaScript/goal.js"></script>
+   <script src="javaScript/chart.js"></script>
   <script src="javaScript/main.js?v=1"> </script>
     <link rel="stylesheet" href="stylesheets/main.css">
     
@@ -47,13 +55,16 @@
         </div>
         <div class="eight wide column">
                 <div class = "ui raised segment budget">
-                        <h1>User Budget</h1>
-                    </div>
+                        <button class = "ui yellow button add_chart">Generate Chart</button>
+                        <canvas class="myChart hidden" id="myChart"></canvas>
+                        <div class = "myChart ui tall stacked segment hidden"></div>
+
+                </div>
         </div>
             
         <div class="four wide column">
             <div class = "income ui raised segment">
-                <h1>Income Per Year</h1>
+                <h1>Income Per Month</h1>
                 <form class = "ui form income">
                     <input type="number" class = "income">
                     <input type="submit" class = "ui positive button">
@@ -66,7 +77,7 @@
             <div class="Goals ui raised segment">
                     <h1>Goals <i class="plus circle icon"></i></h1>
                     <div class="ui floating message">
-                        <p>A goal is the amount of money you wish to have saved up by the deadline</p>
+                        <p>A goal is the amount of money you wish to save up by the deadline</p>
                     </div>
                     <form class="ui form goals">
                             <div class="field">
@@ -96,7 +107,7 @@
                             </div>
                         </div>
 
-                <h1>Spending</h1> <button class="new_spending">Add Spending Category</button>
+                <h1>Spending <i class="plus circle icon"></i></h1> 
                 <ul class = "spendings"></ul>
                 <form class="ui form new_spending">
                     <div class="field">
@@ -113,11 +124,36 @@
         </div>
            
 
-        <div class="four wide column">
+        <div class="sixteen wide column">
             <div class = "Investments ui raised segment">
 
                     <div class = "Stock-market ui raised segment">
-                        <h1>Stock-market</h1>
+                        <h1>Stocks Market</h1>
+                        <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+        <div id="tradingview_842f8"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+        new TradingView.widget(
+        {
+        "width": 980,
+        "height": 610,
+        "symbol": "NASDAQ:AAPL",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "Light",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "container_id": "tradingview_842f8"
+      }
+        );
+        </script>
+      </div>
+      <!-- TradingView Widget END -->
                     </div>
             </div>
         </div>

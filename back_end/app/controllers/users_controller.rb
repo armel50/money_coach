@@ -19,6 +19,11 @@ class UsersController < ApplicationController
         render json: {income: user.income}
     end
 
+    def show 
+        user = User.find_by(id: params[:id])
+        render json: {user: user, categories: user.categories} if user
+    end
+
     private 
     def user_params 
         params.permit(:id,:income,:user)
