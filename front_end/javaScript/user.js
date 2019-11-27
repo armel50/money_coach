@@ -56,9 +56,9 @@ class User{
         console.log(user.data.id)
         $('div.signUp_signIn').transition('horizontal flip')
         if(income){
-            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class ='income'>Income: ${income} $</h3> <h3> Goals </h3><div class = 'user-goals'></div>` 
+            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class ='income'>Income: ${income} $</h3> <h3> Goals </h3><div class = 'user-goals scroller' style= "height: 300px"></div>` 
         }else {
-            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class = 'income'>Income</h3><div class = 'no-income ui floating message'><p>Please define your income</p></div> <h3> Goals </h3> <div class = 'user-goals'></div>`
+            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class = 'income'>Income</h3><div class = 'no-income ui floating message'><p>Please define your income</p></div> <h3> Goals </h3> <div class = 'user-goals scroller' style= "height: 300px"></div>`
         }
 
         if(goals.length > 0){

@@ -6,3 +6,6 @@ div.ui.raised.segment.errors{
     background: red;
 } 
 
+div.scroller {
+    overflow-y: scroll;
+  }
