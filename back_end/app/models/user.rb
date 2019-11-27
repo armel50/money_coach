@@ -3,6 +3,6 @@ class User < ApplicationRecord
     has_many :categories 
     has_secure_password
     validates :email, uniqueness: true
-    validates :password, length: {minimum: 5}
+    # validates :password, length: {minimum: 5}
     
 end

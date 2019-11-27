@@ -12,4 +12,15 @@ class UsersController < ApplicationController
 
        end 
     end
+
+    def update
+        user = User.find_by(id: user_params[:id])
+        user.update(income:  user_params[:income])
+        render json: {income: user.income}
+    end
+
+    private 
+    def user_params 
+        params.permit(:id,:income,:user)
+    end
 end
