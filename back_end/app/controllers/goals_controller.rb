@@ -8,7 +8,10 @@ class GoalsController < ApplicationController
     end
 
     def destroy 
-        binding.pry
+        user = User.find_by(id: params.permit(:user_id)[:user_id])
+        goal = Goal.find_by(id: params.permit(:goal_id)[:goal_id])
+        goal.delete 
+        render json: {goals: user.goals}
     end
 
     private 

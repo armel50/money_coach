@@ -107,8 +107,8 @@ class User{
 class Spending{
     static submit(){
         const submit_spending = document.querySelector("form.new_spending")
-        const name = document.querySelector("input[name='name']")
-        const cost = document.querySelector("input[name='cost']")
+        const name = submit_spending.querySelector("input[name='name']")
+        const cost = submit_spending.querySelector("input[name='cost']")
 
         submit_spending.addEventListener("submit", e=>{
             Spending.add_spending(document.querySelector("h3[user-id]").getAttribute("user-id"),name.value,cost.value)
@@ -300,7 +300,26 @@ class Goal{
         div.appendChild(new_div)
         document.querySelector(`button[goal-id='${goal.id}']`).addEventListener("click",()=>{
             $(`button[goal-id='${goal.id}']`).parent().parent().transition("scale")
+            Goal.delete_goal(document.querySelector(`button[goal-id='${goal.id}']`).getAttribute("goal-id"), document.querySelector(`h3[user-id='${goal.user_id}']`).getAttribute("user-id"))
         })
+    }
+
+    static delete_goal(goal_id,user_id){
+        const params  = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({goal_id: goal_id, user_id: user_id})
+        }
+
+        fetch(`http://localhost:3000/goals/${goal_id}`,params)
+        .then(resp => resp.json())
+        .then(json => {
+            console.log(json)
+        })
+
     }
     
 }
