@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_053641) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "cost"
+    t.float "cost"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2019_11_26_053641) do
   end
 
   create_table "goals", force: :cascade do |t|
-    t.integer "content"
+    t.datetime "deadline"
+    t.text "description"
+    t.float "cost"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

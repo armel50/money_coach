@@ -62,12 +62,30 @@
 
         </div>
 
-        <div class="four wide column">
+        <div class="six wide column">
             <div class="Goals ui raised segment">
-                    <h1>Goals</h1>
+                    <h1>Goals <i class="plus circle icon"></i></h1>
+                    <div class="ui floating message">
+                        <p>A goal is the amount of money you wish to have saved up by the deadline</p>
+                    </div>
+                    <form class="ui form goals">
+                            <div class="field">
+                                    <label>Description</label>
+                                    <input type="text" name = "description" placeholder="Goal Description"> 
+                                </div>
+                                <div class="field">
+                                        <label>Deadline</label>
+                                        <input type="date" name = "deadline"> 
+                                </div>
+                                <div class="field">
+                                    <label>Cost</label>
+                                    <input type="number" name = "cost" placeholder="in $">
+                                </div>
+                                <input type="submit" class= "ui button">
+                    </form>
             </div>
         </div>
-        <div class="eight wide column">
+        <div class="six wide column">
              <div class="spending ui raised segment">
                     <div class="ui horizontal statistic">
                             <div class="value total_spendings">
@@ -95,13 +113,15 @@
         </div>
            
 
+        <div class="four wide column">
+            <div class = "Investments ui raised segment">
 
-        <div class = "Investments ui raised segment">
-
-            <div class = "Stock-market ui raised segment">
-                <h1>Stock-market</h1>
+                    <div class = "Stock-market ui raised segment">
+                        <h1>Stock-market</h1>
+                    </div>
             </div>
         </div>
+     
             
     </div>
     

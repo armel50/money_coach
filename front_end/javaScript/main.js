@@ -56,15 +56,14 @@ class User{
         console.log(user.data.id)
         $('div.signUp_signIn').transition('horizontal flip')
         if(income){
-            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class ='income'>Income: ${income} $</h3> <h3> Goals </h3><ul class = 'user-goals'></ul>` 
+            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class ='income'>Income: ${income} $</h3> <h3> Goals </h3><div class = 'user-goals'></div>` 
         }else {
-            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class = 'income'>Income</h3><div class = 'no-income ui floating message'><p>Please define your income</p></div> <h3> Goals </h3> <ul class = 'user-goals'></ul>`
+            user_info.innerHTML = `<h3 user-id ='${user.data.id}'>Email: ${email}</h3> <h3 class = 'income'>Income</h3><div class = 'no-income ui floating message'><p>Please define your income</p></div> <h3> Goals </h3> <div class = 'user-goals'></div>`
         }
 
         if(goals.length > 0){
             goals.forEach(e=>{
-                li.innerHTML = e 
-                $("ul.user-goals").appendChild(li)
+               Goal.append(e)
             }) 
         }else{
             document.querySelector("ul.user-goals").innerHTML = "<div class = 'ui floating message'><p>You currently have 0 goals</p></div>"
@@ -173,6 +172,8 @@ class Spending{
                                     class = "ui mini negative button">delete</button>
 
                                 </div>
+                                <br>
+                                <br>
                             `
 
         
@@ -201,6 +202,8 @@ class Spending{
 
 
                 </div>
+                <br>
+                <br>
             `
                 ul.appendChild(li)
                 document.querySelector(`button[category-id= '${e.id}']`).addEventListener("click",()=>{
@@ -237,6 +240,71 @@ class Spending{
     }
 }
 
+class Goal{
+    static submit_goal(){
+        const form = document.querySelector("form.goals") 
+        const description = form.querySelector("input[name='description']")
+        const deadline = form.querySelector("input[name='deadline']")
+        const cost = form.querySelector("input[name = 'cost']")
+        form.addEventListener("submit", e =>{
+            Goal.add_new(description.value ,deadline.value ,cost.value)
+            description.value = ""
+            deadline.value = "" 
+            cost.value = ""
+            e.preventDefault()
+
+        })
+
+    }
+
+    static add_new(desc,deadline,cost){
+        const params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({description: desc, deadline: deadline, cost: cost, user_id: document.querySelector("h3[user-id]").getAttribute("user-id")})
+        }
+
+        fetch(`http://localhost:3000/goals`,params)
+        .then(resp => resp.json())
+        .then(json => Goal.append(json))
+        
+    }
+
+    static append(goal){
+        const div = document.querySelector("div.user-goals")
+        const new_div = document.createElement("div")
+        new_div.innerHTML = `<div class = 'ui tall stacked segment'>
+                            <div class = 'ui container'>
+                                <div class="ui horizontal statistic">
+                                <div class="value">
+                                    Cost: ${goal.cost}
+                                </div>
+                                <div class="label">
+                                    $
+                                </div>
+                            
+
+                                </div>
+                                    <p>${goal.description}</p>
+
+                                    <p>Deadline: ${goal.deadline}</p>
+                                    <button goal-id = '${goal.id}'class = "ui mini negative button fluid">delete</button>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                            `
+        div.appendChild(new_div)
+        document.querySelector(`button[goal-id='${goal.id}']`).addEventListener("click",()=>{
+            $(`button[goal-id='${goal.id}']`).parent().parent().transition("scale")
+        })
+    }
+    
+}
+
 function display_errors(errors){
     console.log(errors)
     const error_div = document.querySelector("div.errors")
@@ -266,6 +334,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     User.create_user()
     
     Spending.submit()
+    Goal.submit_goal()
     
 })
 
