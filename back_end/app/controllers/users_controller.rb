@@ -15,7 +15,8 @@ class UsersController < ApplicationController
 
     def update
         user = User.find_by(id: user_params[:id])
-        user.update(income:  user_params[:income])
+        user.update(income:  user_params[:income]) if !user_params[:income].empty?
+       
         render json: {income: user.income}
     end
 

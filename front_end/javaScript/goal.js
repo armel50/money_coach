@@ -27,8 +27,15 @@ class Goal{
 
         fetch(`http://localhost:3000/goals`,params)
         .then(resp => resp.json())
-        .then(json => Goal.append(json))
-        
+        .then(json => {
+            if(json.status && json.status === 400){
+                throw json.error
+            }
+            Goal.append(json)
+        })
+        .catch(errors => {
+            display_errors(errors)
+        })
     }
 
     static append(goal){

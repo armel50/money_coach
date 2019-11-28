@@ -2,10 +2,10 @@
 
 class Chart_Generator{
 
-    static add_eventlinstener(){
+    static add_eventlinstener(id){
        const chart_btn =  document.querySelector("button.add_chart")
-       const user_id = document.querySelector("h3[user-id]").getAttribute("user-id")
-
+       const user_id = id
+        console.log("thisiiii the user id " + user_id)
        chart_btn.addEventListener("click", () =>{
            
             User.get_user(user_id) 
@@ -20,9 +20,10 @@ class Chart_Generator{
         const labels = []
         const colors = []
         if(user.income && spending.length > 0 ){
-            new_array.push(user.income)
-            labels.push("Income")
-            colors.push("rgb(64, 139, 179)")
+
+            // new_array.push(user.income)
+            // labels.push("Income")
+            // colors.push("rgb(64, 139, 179)")
             spending.forEach(e => {new_array.push(e.cost);   labels.push(e.name)})
             while(colors.length !== labels.length){
                const new_color = `rgb(${Math.floor((Math.random() * 256))}, ${Math.floor((Math.random() * 256))}, ${Math.floor((Math.random() * 256))})`
@@ -30,8 +31,18 @@ class Chart_Generator{
                     colors.push(new_color)
                 }
             }
-            Chart_Generator.create_chart(new_array,labels,colors)
+            if (!document.querySelector("div.chart-info").classList.contains("hidden")){
+                document.querySelector("div.chart-info").classList.add("hidden")
+            }
+            Chart_Generator.create_chart(user.income,new_array,labels,colors)
             Chart_Generator.summary(data)
+        }else{
+            document.querySelector("canvas").style.display = ""
+            if (document.querySelector("div.chart-info").classList.contains("hidden")){
+                document.querySelector("div.chart-info").classList.remove("hidden")
+            }
+
+            
         }
     }
 
@@ -51,12 +62,56 @@ class Chart_Generator{
         }else{
             div.innerHTML = `
                 <h3>Summary</h3
-                <p>Warning!<br> You spend ${total_spending - user.income}$ more than you make, with your highest spending on ${category.name} at ${max_spending}$v.<br> Please reduce the cost of your spending.</p>
+                <p>Warning!<br> You spend ${total_spending - user.income}$ more than you make, with your highest spending on ${category.name} at ${max_spending}$.<br> Please reduce the cost of your spending.</p>
         `
         }
         
     }
-    static create_chart(data,labels,colors){
+    static create_chart(income,data,labels,colors){
+//Basic configuration to have a text in the center of the doughnut
+        Chart.pluginService.register({
+            beforeDraw: function (chart) {
+              if (chart.config.options.elements.center) {
+                //Get ctx from string
+                var ctx = chart.chart.ctx;
+          
+                //Get options from the center object in options
+                var centerConfig = chart.config.options.elements.center;
+                var fontStyle = centerConfig.fontStyle || 'Arial';
+                var txt = centerConfig.text;
+                var color = centerConfig.color || '#000';
+                var sidePadding = centerConfig.sidePadding || 20;
+                var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
+                //Start with a base font of 30px
+                ctx.font = "30px " + fontStyle;
+          
+                //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+                var stringWidth = ctx.measureText(txt).width;
+                var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+          
+                // Find out how much the font can grow in width.
+                var widthRatio = elementWidth / stringWidth;
+                var newFontSize = Math.floor(30 * widthRatio);
+                var elementHeight = (chart.innerRadius * 2);
+          
+                // Pick a new font size so it will not be larger than the height of label.
+                var fontSizeToUse = Math.min(newFontSize, elementHeight);
+          
+                //Set font settings to draw it correctly.
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+                var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+                ctx.font = fontSizeToUse+"px " + fontStyle;
+                ctx.fillStyle = color;
+          
+                //Draw text in center
+                ctx.fillText(txt, centerX, centerY);
+              }
+            }
+          });
+
+
         const ctx = document.querySelector("canvas.myChart").getContext('2d')
         const myChart = new Chart(ctx,{
              type: 'doughnut',
@@ -71,6 +126,7 @@ class Chart_Generator{
                 }]
             },
             options: {
+                cutoutPercentage: 70,
                 title: {
                     display: true,
                     text: "Your Budget Per Month",
@@ -78,6 +134,15 @@ class Chart_Generator{
                 },
                legend: {
                     position: "bottom"
+                },
+                //elments is responsible for the display of the text in the center of the doughnut
+                elements: {
+                    center: {
+                    text: `Income: ${income} $`,
+                    color: '#36A2EB', //Default black
+                    fontStyle: 'Helvetica', //Default Arial
+                    sidePadding: 15 //Default 20 (as a percentage)
+                  }
                 }
             }
         })

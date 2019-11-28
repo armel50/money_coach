@@ -3,7 +3,11 @@ class GoalsController < ApplicationController
         user = User.find_by(id: goals_params[:user_id])
         new_goal = Goal.create(goals_params)
         user.goals << new_goal
-        render json: new_goal
+        if new_goal.errors.any?
+            render json: {:error => new_goal.errors.full_messages,status: 400 }
+        else
+            render json: new_goal
+        end 
 
     end
 

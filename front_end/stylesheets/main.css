@@ -3,9 +3,13 @@
 }
 
 div.ui.raised.segment.errors{
-    background: red;
+    background: rgb(250, 117, 117);
 } 
 
 div.scroller {
     overflow-y: scroll;
-  }
+}
+
+main{
+    margin: 100px 0px;
+}

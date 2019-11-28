@@ -10,11 +10,11 @@
 
    <!-- the order of the following script is really important -->
 
-   <script src="javaScript/user.js?v=3"></script>
-   <script src="javaScript/spending.js"></script>
-   <script src="javaScript/goal.js"></script>
-   <script src="javaScript/chart.js"></script>
-  <script src="javaScript/main.js?v=1"> </script>
+   <script src="javaScript/user.js?v=7"></script>
+   <script src="javaScript/spending.js?v=8"></script>
+   <script src="javaScript/goal.js?v=4000"></script>
+   <script src="javaScript/chart.js?v=39"></script>
+  <script src="javaScript/main.js?v=0=1009"> </script>
     <link rel="stylesheet" href="stylesheets/main.css">
     
   <title>Money Coach</title>
@@ -22,7 +22,7 @@
 <body>
     <div class = "ui container">
         <div class = "ui raised segment errors hidden">
-                <h3>The following Errors Prevented you to access your account</h3>
+                <h3>The following Errors Prevented the succes of this action!</h3>
                 <ul class="errors"></ul>
         </div>
     </div>
@@ -30,6 +30,7 @@
         
         <div class = "signUp_signIn ui raised segment">
             <h1>Sign Up Or Sign In</h1>
+            <div class="ui floating message"><p>Only the email is required to sign in. <br>If you wish to have a new account, you need to provide a new email with a password.</p></div>
             <form class = "sign_up_or_in ui form"> 
                 <div class="field">
                     <label>Email</label>
@@ -43,20 +44,20 @@
             </form>
         </div>
     </div>
+    
+    <main class="hidden">
+        <button class="logout"><i class="power off icon"></i></button>
+   
     <div class="ui container main grid">
         <div class="four wide column">
 
-            <div class="user-info ui raised segment">
-                <h1>User Info</h1>
-                <p>user email</p>
-                <p>user loved investment idea</p>
-                <p> user income</p>
-            </div>
+            <div class="user-info ui raised segment"></div>
         </div>
         <div class="eight wide column">
                 <div class = "ui raised segment budget">
                         <button class = "ui yellow button add_chart">Generate Chart</button>
                         <canvas class="myChart hidden" id="myChart"></canvas>
+                        <div class="ui floating message chart-info"><p>The chart will only display if you have previously defined your income and at least one of your spending categories.</p></div>
                         <div class = "myChart ui tall stacked segment hidden"></div>
 
                 </div>
@@ -77,7 +78,7 @@
             <div class="Goals ui raised segment">
                     <h1>Goals <i class="plus circle icon"></i></h1>
                     <div class="ui floating message">
-                        <p>A goal is the amount of money you wish to save up by the deadline</p>
+                        <p>Track you goals here</p>
                     </div>
                     <form class="ui form goals">
                             <div class="field">
@@ -96,7 +97,7 @@
                     </form>
             </div>
         </div>
-        <div class="six wide column">
+        <div class="ten wide column">
              <div class="spending ui raised segment">
                     <div class="ui horizontal statistic">
                             <div class="value total_spendings">
@@ -107,7 +108,7 @@
                             </div>
                         </div>
 
-                <h1>Spending <i class="plus circle icon"></i></h1> 
+                <h1>Spending Per Month <i class="plus circle icon"></i></h1> 
                 <ul class = "spendings"></ul>
                 <form class="ui form new_spending">
                     <div class="field">
@@ -163,5 +164,5 @@
                      </div>
             
     </div>
-    
+</main>
 </body>
