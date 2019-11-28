@@ -25,7 +25,7 @@ class Goal{
             body: JSON.stringify({description: desc, deadline: deadline, cost: cost, user_id: document.querySelector("h3[user-id]").getAttribute("user-id")})
         }
 
-        fetch(`http://localhost:3000/goals`,params)
+        fetch(`${BaseUrl}/goals`,params)
         .then(resp => resp.json())
         .then(json => {
             if(json.status && json.status === 400){
@@ -80,7 +80,7 @@ class Goal{
             body: JSON.stringify({goal_id: goal_id, user_id: user_id})
         }
 
-        fetch(`http://localhost:3000/goals/${goal_id}`,params)
+        fetch(`${BaseUrl}/goals/${goal_id}`,params)
         .then(resp => resp.json())
         .then(json => {
             console.log(json)

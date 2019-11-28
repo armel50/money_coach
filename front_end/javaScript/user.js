@@ -1,3 +1,4 @@
+const BaseUrl = "http://localhost:3000"
 class User{
 
     static create_user (){
@@ -37,7 +38,7 @@ class User{
             },
            body: JSON.stringify({income: income})
         }
-        fetch(`http://localhost:3000/users/${user_id}`, params)
+        fetch(`${BaseUrl}/users/${user_id}`, params)
         .then(resp => resp.json())
         .then(json => {
             const h3 = document.querySelector("h3.income")
@@ -97,7 +98,7 @@ class User{
 
         }
 
-        fetch("http://localhost:3000/users",params)
+        fetch(`${BaseUrl}/users`,params)
         .then(resp => resp.json())
         .then (json => {
             if(json.status && json.status === 400){
@@ -112,7 +113,7 @@ class User{
     }  
     
     static get_user(id){
-        fetch(`http://localhost:3000/users/${id}`)
+        fetch(`${BaseUrl}/users/${id}`)
         .then(resp => resp.json())
         .then(json => Chart_Generator.process(json))
     }

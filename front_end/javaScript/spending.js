@@ -28,7 +28,7 @@ class Spending{
 
         }
 
-        fetch("http://localhost:3000/categories",params)
+        fetch(`${BaseUrl}/categories`,params)
         .then(resp => resp.json())
         .then (json => {
             if(json.status && json.status === 400){
@@ -125,7 +125,7 @@ class Spending{
 
         } 
 
-        fetch(`http://localhost:3000/categories/${spending_id}`,params)
+        fetch(`${BaseUrl}/categories/${spending_id}`,params)
         .then(resp => resp.json())
         .then(json => {
            const total = json.categories.map(e => e.cost).reduce((memo, e)=>e + memo,0)
