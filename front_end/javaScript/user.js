@@ -1,4 +1,4 @@
-const BaseUrl = "http://localhost:3000"
+const BaseUrl = "https://money-coach-back-end.herokuapp.com"
 class User{
 
     static create_user (){
