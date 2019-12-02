@@ -1,1 +1,1 @@
-<?php include_once("main.html")?>
+<?php header('location: /main.html') ;?>
