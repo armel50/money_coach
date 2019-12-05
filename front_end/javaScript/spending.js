@@ -6,29 +6,12 @@ class Spending{
 
         submit_spending.addEventListener("submit", e=>{
             Spending.add_spending(document.querySelector("h3[user-id]").getAttribute("user-id"),name.value,cost.value)
-            name.value = ""
-            cost.value = ""
-
-            e.preventDefault()
+            Application.form_handler(e,[name,cost])  
         })
     }
     static add_spending(user_id,name,cost){
 
-        const params = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                user_id: user_id,
-                name: name,
-                cost: cost
-            })
-
-        }
-
-        fetch(`${BaseUrl}/categories`,params)
+        fetch(`${BaseUrl}/categories`,Application.params("POST",{user_id: user_id,name: name,cost: cost}))
         .then(resp => resp.json())
         .then (json => {
             if(json.status && json.status === 400){
@@ -112,20 +95,8 @@ class Spending{
     }
 
     static delete_spending(spending_id){
-        const params = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                category_id: spending_id
-                
-            })
 
-        } 
-
-        fetch(`${BaseUrl}/categories/${spending_id}`,params)
+        fetch(`${BaseUrl}/categories/${spending_id}`,Application.params("DELETE",{category_id: spending_id}))
         .then(resp => resp.json())
         .then(json => {
            const total = json.categories.map(e => e.cost).reduce((memo, e)=>e + memo,0)

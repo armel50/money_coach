@@ -1,18 +1,16 @@
-const BaseUrl = "https://money-coach-back-end.herokuapp.com"
+// const BaseUrl = "https://money-coach-back-end.herokuapp.com"
+const BaseUrl = "http://localhost:3000"
 class User{
 
     static create_user (){
         const sign_up_form = document.querySelector("form.sign_up_or_in ")
         const email = document.querySelector("input[name= 'email']")
         const password = document.querySelector("input[name= 'password' ]")
+
         sign_up_form.addEventListener("submit",e =>{ 
-            // console.log(email.value)
-            // console.log(password.value)
             User.create_or_find_user(email.value, password.value)
-            email.value = ""
-            password.value = ""
-            e.preventDefault()
-           
+            // form_handler will reset the value of the inputs and prevent the submision of a form
+            Application.form_handler(e,[email,password])  
         })
     }
 
@@ -20,33 +18,25 @@ class User{
         const income_form = document.querySelector("form.income")
         const income_input = document.querySelector("input.income")
         const user_id = document.querySelector("h3[user-id]").getAttribute("user-id")
+
         income_form.addEventListener("submit",e=>{
-                User.update_income(user_id,income_input.value)
-            income_input.value = ""
-            
-            e.preventDefault()
+            User.update_income(user_id,income_input.value)
+            Application.form_handler(e,[income_input])  
+
         })
         
     }
 
     static update_income(user_id,income){
-        const params = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-           body: JSON.stringify({income: income})
-        }
-        fetch(`${BaseUrl}/users/${user_id}`, params)
+     // Application.params takes a method and data as a hash
+        fetch(`${BaseUrl}/users/${user_id}`, Application.params("PATCH",{income: income}))
         .then(resp => resp.json())
         .then(json => {
             const h3 = document.querySelector("h3.income")
            h3.innerHTML = `Income: ${json.income} $`
+           
            if(json.income && document.querySelector("div.no-income")){
-            
-                    document.querySelector("div.no-income").classList.add("hidden")
-
+                document.querySelector("div.no-income").classList.add("hidden")
            }
         })
     }
@@ -85,20 +75,7 @@ class User{
     }
 
     static create_or_find_user(email,password){
-        const params = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-              })
-
-        }
-
-        fetch(`${BaseUrl}/users`,params)
+        fetch(`${BaseUrl}/users`,Application.params("POST",{email: email,password: password}))
         .then(resp => resp.json())
         .then (json => {
             if(json.status && json.status === 400){
@@ -119,4 +96,3 @@ class User{
     }
 
 }
-// module.exports = User

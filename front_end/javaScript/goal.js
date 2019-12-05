@@ -4,28 +4,16 @@ class Goal{
         const description = form.querySelector("input[name='description']")
         const deadline = form.querySelector("input[name='deadline']")
         const cost = form.querySelector("input[name = 'cost']")
+
         form.addEventListener("submit", e =>{
             Goal.add_new(description.value ,deadline.value ,cost.value)
-            description.value = ""
-            deadline.value = "" 
-            cost.value = ""
-            e.preventDefault()
-
+            Application.form_handler(e,[description,deadline,cost])  
         })
 
     }
 
     static add_new(desc,deadline,cost){
-        const params = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({description: desc, deadline: deadline, cost: cost, user_id: document.querySelector("h3[user-id]").getAttribute("user-id")})
-        }
-
-        fetch(`${BaseUrl}/goals`,params)
+        fetch(`${BaseUrl}/goals`,Application.params("POST",{description: desc, deadline: deadline, cost: cost, user_id: document.querySelector("h3[user-id]").getAttribute("user-id")}))
         .then(resp => resp.json())
         .then(json => {
             if(json.status && json.status === 400){
@@ -71,16 +59,7 @@ class Goal{
     }
 
     static delete_goal(goal_id,user_id){
-        const params  = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({goal_id: goal_id, user_id: user_id})
-        }
-
-        fetch(`${BaseUrl}/goals/${goal_id}`,params)
+     fetch(`${BaseUrl}/goals/${goal_id}`,Application.params("DELETE", {goal_id: goal_id, user_id: user_id}))
         .then(resp => resp.json())
         .then(json => {
             console.log(json)
