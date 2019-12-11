@@ -1,5 +1,3 @@
-
-
 class Chart_Generator{
 
     static add_eventlinstener(id){
@@ -7,7 +5,6 @@ class Chart_Generator{
        const user_id = id
         console.log("thisiiii the user id " + user_id)
        chart_btn.addEventListener("click", () =>{
-           
             User.get_user(user_id) 
        })
     }
@@ -16,6 +13,7 @@ class Chart_Generator{
         console.log(data)
         const user = data.user
         const spending = data.categories
+        const total_spending = spending.map(e => e.cost).reduce((memo, e)=>e + memo,0)
         const new_array = []
         const labels = []
         const colors = []
@@ -34,7 +32,8 @@ class Chart_Generator{
             if (!document.querySelector("div.chart-info").classList.contains("hidden")){
                 document.querySelector("div.chart-info").classList.add("hidden")
             }
-            Chart_Generator.create_chart(user.income,new_array,labels,colors)
+            document.querySelector("div.myCanvas").innerHTML = `<canvas class="myChart hidden" id="myChart"></canvas>`
+            Chart_Generator.create_chart(total_spending,new_array,labels,colors)
             Chart_Generator.summary(data)
         }else{
             document.querySelector("canvas").style.display = ""
@@ -67,7 +66,7 @@ class Chart_Generator{
         }
         
     }
-    static create_chart(income,data,labels,colors){
+    static create_chart(total_spending,data,labels,colors){
 //Basic configuration to have a text in the center of the doughnut
         Chart.pluginService.register({
             beforeDraw: function (chart) {
@@ -113,7 +112,8 @@ class Chart_Generator{
 
 
         const ctx = document.querySelector("canvas.myChart").getContext('2d')
-        const myChart = new Chart(ctx,{
+       
+       return new Chart(ctx,{
              type: 'doughnut',
             data: {
                 labels: labels,
@@ -138,7 +138,7 @@ class Chart_Generator{
                 //elments is responsible for the display of the text in the center of the doughnut
                 elements: {
                     center: {
-                    text: `Income: ${income} $`,
+                    text: `Total: ${total_spending} $`,
                     color: '#36A2EB', //Default black
                     fontStyle: 'Helvetica', //Default Arial
                     sidePadding: 15 //Default 20 (as a percentage)
@@ -146,5 +146,7 @@ class Chart_Generator{
                 }
             }
         })
+
+
     }
 }

@@ -34,7 +34,7 @@ class User{
         .then(json => {
             const h3 = document.querySelector("h3.income")
            h3.innerHTML = `Income: ${json.income} $`
-           
+
            if(json.income && document.querySelector("div.no-income")){
                 document.querySelector("div.no-income").classList.add("hidden")
            }
@@ -62,7 +62,7 @@ class User{
                Goal.append(e)
             }) 
         }else{
-            document.querySelector("div.user-goals").innerHTML = "<div class = 'ui floating message'><p>You currently have 0 goals</p></div>"
+            document.querySelector("div.user-goals").innerHTML = "<div class = 'ui floating message no-goals'><p>You currently have 0 goals</p></div>"
         }
 
         if(user.data.attributes.categories.length > 0){

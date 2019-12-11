@@ -27,9 +27,11 @@ class Goal{
     }
 
     static append(goal){
+        const no_goals = document.querySelector("div.no-goals")
         const div = document.querySelector("div.user-goals")
         const new_div = document.createElement("div")
         const date = new Date(goal.deadline)
+        if(no_goals){no_goals.remove()}
         new_div.innerHTML = `<div class = 'ui tall stacked segment'>
                             <div class = 'ui container'>
                                 <div class="ui horizontal statistic">
@@ -51,6 +53,7 @@ class Goal{
                         <br>
                         <br>
                             `
+        
         div.appendChild(new_div)
         document.querySelector(`button[goal-id='${goal.id}']`).addEventListener("click",()=>{
             $(`button[goal-id='${goal.id}']`).parent().parent().transition("scale")
