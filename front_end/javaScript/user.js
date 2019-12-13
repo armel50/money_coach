@@ -1,5 +1,5 @@
-// const BaseUrl = "https://money-coach-back-end.herokuapp.com"
-const BaseUrl = "http://localhost:3000"
+const BaseUrl = "https://money-coach-back-end.herokuapp.com"
+// const BaseUrl = "http://localhost:3000"
 class User{
 
     static create_user (){
