@@ -1,24 +1,30 @@
-# README
+# README: MONEY_COACH
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Short Description 
+    - Money_Coach is an app design to users manage their money flow better and also be aware of events happening in the stocks market.
 
-Things you may want to cover:
+* Download the repo
+    - `git clone git@github.com:armel50/money_coach.git`
 
-* Ruby version
+* Features
+    - Login 
+        - User can login directly through the app 
+    - Interaction 
+        - User can `CRUD` goals.
+        - User can update his or her income info.
+        - User can `CRUD` expenses categories.
+        - User can generate Chart that reflect all the expenses and their total. 
+        - User can interact stock market api. 
+    
 
-* System dependencies
+* Rails version
+    - gem 'rails', '~> 5.2.3'
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* DB used 
+    - SQLite3
+* Front-end
+    - Semantin Ui
+    - JavaScript
+    - jQuery
+* Back-end 
+    - Rails API
